@@ -1,7 +1,6 @@
 package com.ecommerce.identity.api;
 
 
-import com.ecommerce.identity.domain.User;
 import com.ecommerce.identity.domain.UserService;
 import com.ecommerce.identity.dto.RegisterUserRequest;
 import com.ecommerce.identity.dto.UserResponse;
@@ -10,19 +9,20 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/v1/users")
 @RequiredArgsConstructor
 public class UserController {
+    public static final String USER_PATH = "/api/v1/users";
+    public static final String USER_PATH_REGISTER = USER_PATH + "/register";
 
     @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     private final UserService userService;
 
 
-    @PostMapping("/register")
+
+    @PostMapping(USER_PATH_REGISTER)
     public ResponseEntity<UserResponse> registerUser(@RequestBody RegisterUserRequest request) {
         UserResponse createdUser = userService.registerUser(request);
 
